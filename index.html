@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Flashcards: Office Chairs & Suppliers</title>
+<style>
+:root{
+  --bg:#eef3f1; --ink:#14282a; --muted:#5b6f70; --card:#ffffff; --back:#12474a; --back-ink:#f3fbf9;
+  --accent:#e0902b; --line:#c9d7d4; --btn:#ffffff; --btn-ink:#14282a;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f1c1d;--ink:#e8f2f0;--muted:#93aaa8;--card:#182c2e;--back:#e0902b;--back-ink:#1b1204;--line:#2b4547;--btn:#182c2e;--btn-ink:#e8f2f0}
+}
+:root[data-theme="dark"]{--bg:#0f1c1d;--ink:#e8f2f0;--muted:#93aaa8;--card:#182c2e;--back:#e0902b;--back-ink:#1b1204;--line:#2b4547;--btn:#182c2e;--btn-ink:#e8f2f0}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",Roboto,Verdana,sans-serif;min-height:100vh;min-height:100dvh}
+button{font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-appearance:none;appearance:none}
+.wrap{max-width:720px;margin:0 auto;padding:16px;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+h1{font-size:1.1rem;margin:4px 0 12px;font-weight:700}
+.modes{display:flex;gap:6px;background:var(--line);padding:4px;border-radius:14px}
+.modes button{flex:1;min-height:46px;border:0;padding:8px 6px;border-radius:10px;background:transparent;color:var(--ink);font-size:1rem;font-weight:600;cursor:pointer}
+.modes button.on{background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.prog{display:flex;align-items:center;gap:10px;margin:14px 0 10px}
+.bar{flex:1;height:8px;background:var(--line);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+#count{font-weight:700;font-variant-numeric:tabular-nums;min-width:4.5em;text-align:right}
+.card{position:relative;height:clamp(220px,42vh,340px);height:clamp(220px,42dvh,340px);cursor:pointer;outline-offset:4px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.face{position:absolute;inset:0;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:44px 20px 40px;text-align:center;border:2px solid var(--line);animation:pop .22s ease-out}
+.front{background:var(--card)}
+.rear{background:var(--back);color:var(--back-ink);border-color:transparent}
+.card[data-side="front"] .rear,.card[data-side="back"] .front{display:none}
+@keyframes pop{from{opacity:.2;transform:scale(.97)}to{opacity:1;transform:none}}
+.tag{position:absolute;top:14px;left:18px;font-size:.85rem;color:var(--muted)}
+.rear .tag{color:var(--back-ink);opacity:.8}
+.word{font-size:clamp(1.5rem,6.5vw,2.6rem);font-weight:700;line-height:1.2;overflow-wrap:anywhere;hyphens:auto}
+.hint{position:absolute;bottom:12px;left:12px;right:12px;font-size:.8rem;color:var(--muted)}
+.rear .hint{color:inherit;opacity:.8}
+.speak{flex:none;border:2px solid currentColor;background:transparent;color:inherit;border-radius:50%;width:56px;height:56px;font-size:1.5rem;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;padding:0}
+.speak:active{transform:scale(.93)}
+.row{display:grid;gap:8px;margin-top:12px}
+.row.two{grid-template-columns:1fr 1fr}
+.b{min-height:50px;border:2px solid var(--line);background:var(--btn);color:var(--btn-ink);border-radius:14px;padding:10px 8px;font-size:1rem;font-weight:600;cursor:pointer}
+.b:active{transform:scale(.98)}
+.b.main{background:var(--accent);border-color:var(--accent);color:#1b1204}
+.b:focus-visible,.modes button:focus-visible,.speak:focus-visible,.card:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+#note{margin-top:12px;font-size:.85rem;color:var(--muted);min-height:2.6em}
+@media (max-height:520px) and (orientation:landscape){
+  .card{height:180px}.face{padding:34px 16px 30px;gap:8px}.hint{display:none}.speak{width:46px;height:46px}
+}
+@media (min-width:900px){.wrap{padding-top:32px}.card{height:360px}.word{font-size:2.8rem}}
+@media (prefers-reduced-motion:reduce){.face{animation:none}.bar i{transition:none}}
+</style>
+</head>
+<body>
+<noscript><div style="max-width:720px;margin:0 auto;padding:16px;font-family:sans-serif"><p><b>Карточки не запустились.</b> Откройте этот файл в браузере (Safari или Chrome), а не в просмотре Telegram или «Файлов». Пока здесь виден только список слов без озвучки:</p><ol><li>Adjustable chair — регулируемое кресло</li><li>Seat height — высота сиденья</li><li>Backrest — спинка кресла</li><li>Armrests — подлокотники</li><li>Lumbar support — поясничная поддержка</li><li>Recline the backrest — откинуть спинку кресла</li><li>Adjust the seat height — отрегулировать высоту сиденья</li><li>Tilt mechanism — механизм наклона</li><li>Reclining function — функция откидывания спинки</li><li>Headrest — подголовник</li><li>Weight capacity — максимальная допустимая нагрузка</li><li>Breathable mesh — дышащая сетка</li><li>Raise or lower the seat — поднять или опустить сиденье</li><li>Adjust the armrests — отрегулировать подлокотники</li><li>Lock the backrest in position — зафиксировать спинку в положении</li><li>Adjust the lumbar support — отрегулировать поясничную поддержку</li><li>Tilt the seat — наклонить сиденье</li><li>Lean back — откинуться назад</li><li>Sit upright — сидеть прямо</li><li>Release the tilt lock — разблокировать механизм наклона</li><li>Adjust the chair to your height — настроить кресло под свой рост</li><li>Supplier — поставщик</li><li>Manufacturer — производитель</li><li>Business partnership — деловое партнёрство</li><li>Wholesale price — оптовая цена</li><li>Product range — ассортимент продукции</li><li>Product catalogue — каталог продукции</li><li>Minimum order quantity — минимальный объём заказа</li><li>Delivery terms — условия доставки</li><li>Product sample — образец продукции</li><li>Product demonstration — демонстрация продукта</li><li>Training materials — обучающие материалы</li><li>Expand my product range — расширить свой ассортимент</li></ol></div></noscript>
+<div class="wrap">
+  <h1>Flashcards: Office Chairs & Suppliers</h1>
+  <div class="modes">
+    <button type="button" id="m1" class="on">English → Русский</button>
+    <button type="button" id="m2">Русский → English</button>
+  </div>
+  <div class="prog"><div class="bar"><i id="fill"></i></div><span id="count">1 / 33</span></div>
+  <div class="card" id="card" role="button" tabindex="0" data-side="front" aria-label="Карточка. Нажмите, чтобы показать перевод">
+    <div class="face front">
+      <span class="tag" id="ftag"></span>
+      <div class="word" id="fword"></div>
+      <button type="button" class="speak" id="fspeak" aria-label="Озвучить">🔊</button>
+      <span class="hint">Нажмите на карточку, чтобы увидеть перевод</span>
+    </div>
+    <div class="face rear">
+      <span class="tag" id="btag"></span>
+      <div class="word" id="bword"></div>
+      <button type="button" class="speak" id="bspeak" aria-label="Озвучить">🔊</button>
+      <span class="hint">Нажмите ещё раз, чтобы вернуться</span>
+    </div>
+  </div>
+  <div class="row two">
+    <button type="button" class="b" id="prev">← Предыдущая</button>
+    <button type="button" class="b main" id="next">Следующая →</button>
+  </div>
+  <div class="row">
+    <button type="button" class="b" id="show">Показать перевод</button>
+  </div>
+  <div class="row two">
+    <button type="button" class="b" id="shuffle">🔀 Перемешать</button>
+    <button type="button" class="b" id="restart">↺ Начать заново</button>
+  </div>
+  <div id="note"></div>
+</div>
+<script>
+const WORDS=[
+["Adjustable chair","регулируемое кресло"],
+["Seat height","высота сиденья"],
+["Backrest","спинка кресла"],
+["Armrests","подлокотники"],
+["Lumbar support","поясничная поддержка"],
+["Recline the backrest","откинуть спинку кресла"],
+["Adjust the seat height","отрегулировать высоту сиденья"],
+["Tilt mechanism","механизм наклона"],
+["Reclining function","функция откидывания спинки"],
+["Headrest","подголовник"],
+["Weight capacity","максимальная допустимая нагрузка"],
+["Breathable mesh","дышащая сетка"],
+["Raise or lower the seat","поднять или опустить сиденье"],
+["Adjust the armrests","отрегулировать подлокотники"],
+["Lock the backrest in position","зафиксировать спинку в положении"],
+["Adjust the lumbar support","отрегулировать поясничную поддержку"],
+["Tilt the seat","наклонить сиденье"],
+["Lean back","откинуться назад"],
+["Sit upright","сидеть прямо"],
+["Release the tilt lock","разблокировать механизм наклона"],
+["Adjust the chair to your height","настроить кресло под свой рост"],
+["Supplier","поставщик"],
+["Manufacturer","производитель"],
+["Business partnership","деловое партнёрство"],
+["Wholesale price","оптовая цена"],
+["Product range","ассортимент продукции"],
+["Product catalogue","каталог продукции"],
+["Minimum order quantity","минимальный объём заказа"],
+["Delivery terms","условия доставки"],
+["Product sample","образец продукции"],
+["Product demonstration","демонстрация продукта"],
+["Training materials","обучающие материалы"],
+["Expand my product range","расширить свой ассортимент"]
+];
+const $=id=>document.getElementById(id);
+const synth=('speechSynthesis' in window && 'SpeechSynthesisUtterance' in window)?window.speechSynthesis:null;
+let order=WORDS.map((_,i)=>i), idx=0, mode='en', flipped=false, voices=[], utter=null, timer=null;
+
+function loadVoices(){ if(synth){ try{voices=synth.getVoices()||[];}catch(e){voices=[];} } }
+loadVoices();
+if(synth){
+  if(synth.addEventListener) synth.addEventListener('voiceschanged',loadVoices); else synth.onvoiceschanged=loadVoices;
+  let tries=0; const t=setInterval(()=>{ loadVoices(); if(voices.length||++tries>10) clearInterval(t); },300);
+}
+function pickVoice(lang){
+  const want=lang==='en'?['en-us','en-gb','en']:['ru-ru','ru'];
+  for(const p of want){
+    const v=voices.find(v=>(v.lang||'').replace('_','-').toLowerCase()===p)||voices.find(v=>(v.lang||'').toLowerCase().startsWith(p));
+    if(v) return v;
+  }
+  return null;
+}
+function speak(text,lang){
+  if(!synth){ $('note').textContent='Озвучка не поддерживается в этом браузере. Откройте карточки в Safari или Chrome.'; return; }
+  clearTimeout(timer);
+  loadVoices();
+  if(synth.speaking||synth.pending) synth.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=lang==='en'?'en-US':'ru-RU';
+  const v=pickVoice(lang); if(v) u.voice=v;
+  u.rate=0.9;
+  utter=u; /* держим ссылку, иначе Android Chrome может оборвать речь */
+  $('note').textContent=(lang==='ru'&&voices.length&&!v)?'Русский голос не найден на этом устройстве. Установите его в настройках речи.':'Если нет звука, включите громкость и выключите беззвучный режим.';
+  timer=setTimeout(()=>{ try{ if(synth.paused) synth.resume(); synth.speak(u);}catch(e){} },60);
+}
+
+const cur=()=>WORDS[order[idx]];
+const langs=()=>mode==='en'?{f:'en',b:'ru',fi:0,bi:1}:{f:'ru',b:'en',fi:1,bi:0};
+
+function render(){
+  const w=cur(),L=langs();
+  $('fword').textContent=w[L.fi];
+  $('bword').textContent=w[L.bi];
+  $('fword').lang=L.f; $('bword').lang=L.b;
+  $('ftag').textContent=L.f==='en'?'English':'Русский';
+  $('btag').textContent=L.b==='en'?'English':'Русский';
+  $('count').textContent=(idx+1)+' / '+order.length;
+  $('fill').style.width=((idx+1)/order.length*100)+'%';
+  $('card').dataset.side=flipped?'back':'front';
+  $('card').setAttribute('aria-label',flipped?'Карточка: перевод. Нажмите, чтобы вернуться':'Карточка. Нажмите, чтобы показать перевод');
+  $('show').textContent=flipped?'Скрыть перевод':'Показать перевод';
+  $('m1').classList.toggle('on',mode==='en');
+  $('m2').classList.toggle('on',mode==='ru');
+}
+function stopSpeech(){ clearTimeout(timer); if(synth){ try{synth.cancel();}catch(e){} } }
+function flip(){ flipped=!flipped; render(); }
+function go(d){ idx=(idx+d+order.length)%order.length; flipped=false; stopSpeech(); render(); }
+function setMode(m){ mode=m; flipped=false; stopSpeech(); render(); }
+
+$('card').addEventListener('click',flip);
+$('fspeak').addEventListener('click',e=>{e.stopPropagation();const L=langs();speak(cur()[L.fi],L.f);});
+$('bspeak').addEventListener('click',e=>{e.stopPropagation();const L=langs();speak(cur()[L.bi],L.b);});
+$('show').addEventListener('click',flip);
+$('next').addEventListener('click',()=>go(1));
+$('prev').addEventListener('click',()=>go(-1));
+$('m1').addEventListener('click',()=>setMode('en'));
+$('m2').addEventListener('click',()=>setMode('ru'));
+$('shuffle').addEventListener('click',()=>{
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  idx=0;flipped=false;stopSpeech();render();
+});
+$('restart').addEventListener('click',()=>{order=WORDS.map((_,i)=>i);idx=0;flipped=false;stopSpeech();render();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')go(1);
+  else if(e.key==='ArrowLeft')go(-1);
+  else if((e.key===' '||e.key==='Enter')&&document.activeElement===$('card')){e.preventDefault();flip();}
+});
+render();
+</script>
+</body>
+</html>
